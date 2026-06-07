@@ -1,0 +1,189 @@
+/*
+  Sunshine Design System — Token Layer
+  ====================================
+  Audience: adults 65+, often living alone, often new to touchscreens,
+  frequently affected by reduced visual acuity, contrast sensitivity,
+  tremor, and slower-but-not-impaired cognition.
+
+  Every token below is chosen against that brief, not against general
+  "modern app" taste. Where a choice needs defending, the comment says why.
+*/
+
+:root {
+  /* ---------------------------------------------------------------
+     COLOR — "calm clinic, not cold clinic"
+     Cool grays read as sterile and can feel institutional to someone
+     who already associates apps/devices with hospitals and forms.
+     So the neutral ramp is warm (paper/sand/ink) — like a well-lit
+     room with morning light — and the functional color (trust,
+     safety, action) sits on TOP of that warmth rather than replacing it.
+     One accent only (amber) carries all "this matters, look here"
+     signaling, so attention is never split.
+  ----------------------------------------------------------------*/
+
+  /* Neutrals — warm paper ramp, not cool gray */
+  --color-paper:        #FBF7F1;  /* page background — soft, not glaring white */
+  --color-sand:         #F0E9DC;  /* recessed surfaces, dividers, table stripes */
+  --color-sand-strong:  #E2D8C4;  /* borders, input outlines at rest */
+  --color-ink-faint:    #8A8275;  /* placeholder text, disabled labels — AA only, never body copy */
+  --color-ink-soft:     #5B554A;  /* secondary text, captions, metadata */
+  --color-ink:          #2A2620;  /* primary text — warm near-black, ~14.5:1 on paper (AAA) */
+
+  /* Primary — "harbor blue": deep, muted, steady. Reads as competence
+     and calm rather than corporate-tech or medical-alert. Desaturated
+     so it never vibrates against the warm neutrals. */
+  --color-harbor-900:   #1C3640;
+  --color-harbor-700:   #2E5266;  /* primary — buttons, links, active nav, ~8.6:1 on paper (AAA) */
+  --color-harbor-500:   #4D7588;
+  --color-harbor-200:   #C9DCE3;  /* tints — selected states, info banners */
+  --color-harbor-100:   #E6EFF2;
+
+  /* Secondary — "sage": a quiet green for growth/wellbeing contexts
+     (health, hobbies, community) so the app has a second voice that
+     isn't a louder version of the primary. */
+  --color-sage-700:     #4F6F57;  /* ~7.4:1 on paper (AAA) */
+  --color-sage-200:     #D7E3D9;
+
+  /* Accent — "marigold": the ONE warm punch color, named for the
+     product's own metaphor (sunshine). Reserved for things that need
+     a person's attention RIGHT NOW — primary CTAs, the SOS surface,
+     unread/active indicators. Because it's used nowhere else, it
+     never competes with itself for attention. */
+  --color-marigold-700: #A85F1B;  /* text-on-light use — ~6.1:1 on paper (AA-large/AAA-large) */
+  --color-marigold-500: #E0942F;  /* fills, icons, large text/headlines only — do not use for small body text */
+  --color-marigold-100: #FBE8CF;  /* tints — highlight backgrounds */
+
+  /* Semantic — muted, never neon. A warning should read as "attend to
+     this calmly," not "panic." Pure saturated red/green read as
+     alarm/childish respectively on a screen used by people who may
+     already feel anxious about technology. */
+  --color-success:      #3F6B3A;  /* ~7.9:1 on paper */
+  --color-success-bg:   #E2EBDF;
+  --color-warning:      #9C5B12;  /* ~6.6:1 on paper */
+  --color-warning-bg:   #F6E8D6;
+  --color-danger:       #A23B2C;  /* ~6.9:1 on paper — used for SOS & destructive actions only */
+  --color-danger-bg:    #F5E1DB;
+
+  /* Surfaces & overlays */
+  --color-surface:        #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-overlay:        rgba(42, 38, 32, 0.5); /* warm-tinted scrim, not cold black */
+
+  /* ---------------------------------------------------------------
+     TYPOGRAPHY — "a letter from someone who respects you"
+     Fraunces (a warm, slightly-humanist display serif) for headings:
+     it has the gravity of print, which reads as trustworthy and
+     unhurried — the opposite of disposable app chrome. Hanken Grotesk
+     carries body copy: a humanist sans with open apertures and a
+     large x-height, which stays legible at the larger sizes this
+     audience needs without starting to look "shouty" the way many
+     geometric sans (Inter, Roboto) do when scaled up.
+  ----------------------------------------------------------------*/
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+
+  /* Base size is 19px, not the conventional 16px: the single highest-
+     leverage accessibility decision in this whole system. Everything
+     else (line-height, spacing, tap targets) is derived to stay in
+     proportion to it, so nothing looks "zoomed in" relative to its
+     neighbors — it looks like the system was designed at this size,
+     because it was. */
+  --text-base-size: 19px;
+  --text-scale-ratio: 1.2; /* minor third — gentle steps a wayfinding reader can follow */
+
+  --text-2xs:  0.75rem;    /* 14px  — micro-labels (timestamps) only; never body or actions */
+  --text-xs:   0.875rem;   /* 17px  — captions, helper text */
+  --text-sm:   1rem;       /* 19px  — dense UI labels, secondary buttons */
+  --text-base: 1.15rem;    /* ~22px — body copy, primary reading size */
+  --text-md:   1.35rem;    /* ~26px — emphasized body, card titles */
+  --text-lg:   1.65rem;    /* ~31px — section headings */
+  --text-xl:   2.1rem;     /* ~40px — page titles */
+  --text-2xl:  2.6rem;     /* ~49px — hero / landing moments only */
+
+  --leading-tight:  1.25;
+  --leading-normal: 1.5;
+  --leading-loose:  1.7;   /* default for body copy — generous line-height reduces line loss for low-vision readers */
+
+  --weight-regular: 450;
+  --weight-medium:  550;
+  --weight-bold:    650;
+
+  /* ---------------------------------------------------------------
+     SPACE — derived from the tap target, not from a generic 8px grid
+     The smallest meaningful unit in this product is a 56px touch
+     target (see --size-tap-comfortable below) — chosen because elderly
+     users with mild tremor need targets meaningfully larger than the
+     WCAG 44px minimum. Every spacing step is a fraction or multiple
+     of that unit, so spacing and touchable area always agree — a
+     button never "looks" bigger or smaller than the area that responds.
+     Base unit: 7px (1/8 of 56). Steps follow a 1-2-3-4-6-8-12-16 run
+     so spacing increases visibly between adjacent steps — important
+     for readers who scan layout structure rather than read every word.
+  ----------------------------------------------------------------*/
+  --space-unit: 0.4375rem; /* 7px */
+  --space-1:  var(--space-unit);              /* 7px  — hairline gaps (icon-to-label) */
+  --space-2:  calc(var(--space-unit) * 2);    /* 14px — tight stacks */
+  --space-3:  calc(var(--space-unit) * 3);    /* 21px — related-content gaps */
+  --space-4:  calc(var(--space-unit) * 4);    /* 28px — default component padding */
+  --space-6:  calc(var(--space-unit) * 6);    /* 42px — section padding */
+  --space-8:  calc(var(--space-unit) * 8);    /* 56px — group separation = one tap target */
+  --space-12: calc(var(--space-unit) * 12);   /* 84px — page-region separation */
+  --space-16: calc(var(--space-unit) * 16);   /* 112px — major layout breaks */
+
+  /* ---------------------------------------------------------------
+     SHAPE — soft, hand-finished, never sharp or "techy"
+     A single radius family used consistently signals "one calm
+     system" rather than "assembled from parts." Larger radii on
+     larger surfaces (cards) than small ones (chips) so nothing
+     ever looks like a rounded rectangle stretched out of proportion.
+  ----------------------------------------------------------------*/
+  --radius-sm:   10px;  /* chips, badges, inputs */
+  --radius-md:   16px;  /* buttons, list rows */
+  --radius-lg:   24px;  /* cards, modals */
+  --radius-full: 999px; /* pills, avatars, the SOS button */
+
+  /* ---------------------------------------------------------------
+     ELEVATION — soft, warm-tinted, low-contrast
+     Shadows use the ink color at low opacity (not pure black), so
+     elevated surfaces read as "gently raised paper," matching the
+     warm-paper metaphor instead of looking like glassy tech panels.
+     Two steps only — resting and active — because more than that
+     becomes noise that a low-vision reader has to decode.
+  ----------------------------------------------------------------*/
+  --shadow-resting: 0 2px 10px rgba(42, 38, 32, 0.08);
+  --shadow-raised:  0 8px 28px rgba(42, 38, 32, 0.14);
+  --shadow-focus-ring: 0 0 0 4px var(--color-marigold-100), 0 0 0 7px var(--color-marigold-500);
+
+  /* ---------------------------------------------------------------
+     SIZE — touch targets
+     56px is the comfortable default; 44px (the WCAG 2.5.5 AA minimum)
+     exists only for dense, low-risk contexts (e.g. a row's secondary
+     icon) and is never used for a primary or safety-relevant action.
+  ----------------------------------------------------------------*/
+  --size-tap-minimum:     44px;
+  --size-tap-comfortable: 56px;
+  --size-tap-sos:         96px;  /* the emergency action — large enough to hit without looking */
+
+  /* ---------------------------------------------------------------
+     MOTION — reassurance, not decoration
+     Slow, single-easing, no bounce. Bounce/elastic easing reads as
+     "playful" to a 25-year-old and as "is this broken?" to someone
+     less familiar with software conventions. Durations are longer
+     than typical (responding to the audience's processing pace) so
+     a state change is never missed, but never so slow it feels laggy.
+  ----------------------------------------------------------------*/
+  --motion-duration-fast:   160ms;
+  --motion-duration-normal: 240ms;
+  --motion-duration-slow:   420ms;
+  --motion-ease: cubic-bezier(0.3, 0, 0.2, 1); /* gentle deceleration, no overshoot */
+
+  /* Respect OS-level reduced-motion without a separate token set */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-duration-fast: 0ms;
+    --motion-duration-normal: 0ms;
+    --motion-duration-slow: 0ms;
+  }
+}

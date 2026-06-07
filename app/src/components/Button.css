@@ -1,0 +1,98 @@
+/* Button
+   Sizing starts at --size-tap-comfortable (56px), not the 36-40px
+   common in most systems — this is the load-bearing accessibility
+   decision for every clickable surface in the product. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--size-tap-comfortable);
+  padding: 0 var(--space-6);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--motion-duration-fast) var(--motion-ease),
+              border-color var(--motion-duration-fast) var(--motion-ease),
+              color var(--motion-duration-fast) var(--motion-ease),
+              transform var(--motion-duration-fast) var(--motion-ease);
+}
+
+.btn:active:not(:disabled) {
+  /* A small, real press — confirms the tap registered without
+     relying on sound or a separate animation. */
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Primary — the one decisive action on a screen. Solid harbor blue
+   so it's unambiguous which button to press when in doubt. */
+.btn--primary {
+  background: var(--color-harbor-700);
+  color: var(--color-paper);
+}
+.btn--primary:hover:not(:disabled)  { background: var(--color-harbor-900); }
+.btn--primary:active:not(:disabled) { background: var(--color-harbor-900); }
+
+/* Secondary — present but quieter; for "the other reasonable option,"
+   never for "the thing we hope you don't pick" (that's --ghost or --tertiary). */
+.btn--secondary {
+  background: var(--color-surface);
+  color: var(--color-harbor-700);
+  border-color: var(--color-harbor-700);
+}
+.btn--secondary:hover:not(:disabled) {
+  background: var(--color-harbor-100);
+}
+
+/* Ghost — for low-emphasis, frequently-repeated actions (e.g. "Skip,"
+   "Not now") where a bordered button would create visual noise across
+   a long list. */
+.btn--ghost {
+  background: transparent;
+  color: var(--color-harbor-700);
+  border-color: transparent;
+}
+.btn--ghost:hover:not(:disabled) {
+  background: var(--color-harbor-100);
+}
+
+/* Danger — reserved for destructive/irreversible actions ONLY
+   ("Remove this contact," "Delete this record"). Never used for SOS —
+   SOS is a request for help, not a destructive action, and pairing
+   the two would teach users to associate the SOS color with "uh-oh." */
+.btn--danger {
+  background: var(--color-surface);
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+.btn--danger:hover:not(:disabled) {
+  background: var(--color-danger-bg);
+}
+
+/* Sizes — "comfortable" is the default and should be left alone in
+   95% of the product. "compact" exists only for dense utility rows
+   (e.g. inline list actions) and must still clear the 44px minimum. */
+.btn--compact {
+  min-height: var(--size-tap-minimum);
+  padding: 0 var(--space-4);
+  font-size: var(--text-sm);
+}
+
+.btn--full { width: 100%; }
+
+.btn .btn__icon {
+  display: inline-flex;
+  width: 1.3em;
+  height: 1.3em;
+  flex-shrink: 0;
+}

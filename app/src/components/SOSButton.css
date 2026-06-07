@@ -1,0 +1,92 @@
+/* SOSButton
+   Proposed addition — not in the original brief, but a generic Button
+   cannot carry this job. The emergency action needs: (1) a silhouette
+   recognizable from across a room, (2) protection against an accidental
+   brush-trigger, and (3) an unmistakable "help is coming" confirmation
+   the instant it fires — fear spikes when feedback is ambiguous.
+
+   Deliberately NOT styled in --color-danger: danger-red means "you are
+   about to break/lose something." SOS means "a person is coming to help
+   you." Marigold — the system's single warm accent — carries that
+   meaning instead, so the button reads as a lifeline, not a threat. */
+
+.sos-button {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  width: var(--size-tap-sos);
+  height: var(--size-tap-sos);
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--color-marigold-500);
+  color: var(--color-surface);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 10px 32px rgba(168, 95, 27, 0.35);
+  transition: transform var(--motion-duration-fast) var(--motion-ease),
+              box-shadow var(--motion-duration-fast) var(--motion-ease);
+}
+
+.sos-button:hover {
+  transform: scale(1.03);
+}
+
+.sos-button:active {
+  transform: scale(0.97);
+}
+
+/* A slow, continuous "breathing" ring — not an urgent pulse. It says
+   "I am always here," not "hurry up." Disabled entirely under
+   reduced-motion via the shared media query in tokens.css collapsing
+   the duration to 0. */
+.sos-button::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: inherit;
+  border: 2px solid var(--color-marigold-500);
+  opacity: 0.45;
+  animation: sos-breathe 3.6s var(--motion-ease) infinite;
+}
+
+@keyframes sos-breathe {
+  0%   { transform: scale(1);    opacity: 0.45; }
+  50%  { transform: scale(1.12); opacity: 0.1; }
+  100% { transform: scale(1);    opacity: 0.45; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sos-button::after { animation: none; opacity: 0.25; }
+}
+
+.sos-button__label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* Armed state — shown for a few seconds after the first press, before
+   the alert actually sends. This is the "are you sure" moment, but
+   expressed as a countdown rather than a dialog, so a person who is
+   actually in distress is never blocked by an extra tap. Anyone who
+   pressed by accident has a calm, visible window to stand down. */
+.sos-button--armed {
+  background: var(--color-harbor-700);
+  box-shadow: 0 10px 32px rgba(28, 54, 64, 0.35);
+}
+
+.sos-button--armed::after {
+  border-color: var(--color-harbor-700);
+}
+
+.sos-button--sent {
+  background: var(--color-sage-700);
+}

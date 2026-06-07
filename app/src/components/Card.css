@@ -1,0 +1,57 @@
+/* Card
+   The workhorse container. Generous padding and a soft, low-contrast
+   shadow so cards read as "raised paper," matching the warm-paper
+   metaphor — never glassy, never hard-edged. */
+
+.card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-resting);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.card--interactive {
+  cursor: pointer;
+  transition: box-shadow var(--motion-duration-normal) var(--motion-ease),
+              transform var(--motion-duration-normal) var(--motion-ease);
+}
+
+.card--interactive:hover {
+  box-shadow: var(--shadow-raised);
+  transform: translateY(-2px);
+}
+
+.card__eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-harbor-500);
+}
+
+.card__title {
+  margin: 0;
+  font-size: var(--text-md);
+}
+
+.card__body {
+  color: var(--color-ink-soft);
+  font-size: var(--text-base);
+}
+
+.card__footer {
+  margin-top: var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Tone variants — for cards that carry a status, not just content.
+   Used sparingly: a screen of all-tinted cards loses the signal. */
+.card--harbor  { background: var(--color-harbor-100); }
+.card--sage    { background: var(--color-sage-200); }
+.card--marigold{ background: var(--color-marigold-100); }
