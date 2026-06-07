@@ -1,0 +1,65 @@
+/* Modal
+   Used sparingly and only for things that genuinely must interrupt:
+   confirming an SOS cancellation, confirming a destructive action,
+   a single urgent notice. A modal is an interruption — for an
+   audience that can already find interruptions disorienting, every
+   one must earn its place. Prefer an inline Card or a full page for
+   anything that isn't truly blocking. */
+
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--color-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  z-index: 1000;
+  animation: modal-fade var(--motion-duration-normal) var(--motion-ease);
+}
+
+.modal {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-raised);
+  padding: var(--space-6);
+  max-width: 32rem;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: modal-rise var(--motion-duration-normal) var(--motion-ease);
+}
+
+.modal__title {
+  margin: 0 0 var(--space-3);
+}
+
+.modal__body {
+  color: var(--color-ink-soft);
+  margin-bottom: var(--space-6);
+}
+
+.modal__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap-reverse;
+}
+
+.modal__actions > * {
+  flex: 1;
+  min-width: 10rem;
+}
+
+@keyframes modal-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modal-rise {
+  from { opacity: 0; transform: translateY(12px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal__overlay, .modal { animation: none; }
+}

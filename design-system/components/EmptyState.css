@@ -1,0 +1,48 @@
+/* EmptyState
+   "Nothing here yet" must never read as "you're doing something wrong"
+   or "nobody is here for you" — both are real risks for this audience
+   in a product about reducing isolation. Copy is supplied by the
+   product layer, but the *shape* of this component (warm illustration
+   slot, reassuring tone, one gentle next step) is fixed here so an
+   empty community feed and an empty medicine list feel like the same
+   calm app, not a glitch. */
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  padding: var(--space-12) var(--space-6);
+  color: var(--color-ink-soft);
+}
+
+.empty-state__art {
+  width: 6.5rem;
+  height: 6.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-harbor-100);
+  color: var(--color-harbor-700);
+}
+
+.empty-state__art svg,
+.empty-state__art img {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+.empty-state__title {
+  margin: 0;
+  color: var(--color-harbor-900);
+}
+
+.empty-state__message {
+  max-width: 38ch;
+}
+
+.empty-state__action {
+  margin-top: var(--space-2);
+}
