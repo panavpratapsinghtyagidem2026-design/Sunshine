@@ -43,9 +43,9 @@
 
 .sos-screen__contact-list li {
   display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
 }
 
 .sos-screen__contact-name {
